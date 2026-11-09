@@ -1,4 +1,4 @@
-# tweetmd
+# xmd
 
 Converts a tweet + its conversation into Markdown via a local Playwright
 session, with image OCR, diagram-to-mermaid, and AI alt-text through `claude -p`.

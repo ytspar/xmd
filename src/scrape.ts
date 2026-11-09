@@ -23,7 +23,7 @@ export interface ScrapeOptions {
 /**
  * Command that installs the Chromium build matching the Playwright copy this
  * module actually loads — so it works from any directory, including a global
- * `tweetmd` install, and can't pick up a different Playwright version.
+ * `xmd` install, and can't pick up a different Playwright version.
  */
 function browserInstallCommand(): string {
   try {
@@ -114,7 +114,7 @@ export async function login(timeoutMs = 5 * 60_000): Promise<void> {
     }
     await sleep(2000);
   }
-  await finish("\nTimed out waiting for login. Re-run `tweetmd login` and sign in.", 1);
+  await finish("\nTimed out waiting for login. Re-run `xmd login` and sign in.", 1);
 }
 
 /** Page loads to try before concluding X won't serve the tweet's data. */
@@ -172,7 +172,7 @@ async function scrapeUnlocked(opts: ScrapeOptions): Promise<Thread> {
 
       if (isLoginWall(page.url())) {
         throw new Error(
-          "X is showing a login wall. Run `tweetmd login` first to sign in, then retry.",
+          "X is showing a login wall. Run `xmd login` first to sign in, then retry.",
         );
       }
 
@@ -195,7 +195,7 @@ async function scrapeUnlocked(opts: ScrapeOptions): Promise<Thread> {
     if (payloads.length === 0) {
       throw new Error(
         `No TweetDetail data was captured after ${LOAD_ATTEMPTS} attempts. The tweet may be ` +
-          "protected/deleted, or the session is logged out (try `tweetmd login`).",
+          "protected/deleted, or the session is logged out (try `xmd login`).",
       );
     }
 

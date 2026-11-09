@@ -43,7 +43,7 @@ interface Args {
 
 /**
  * Where captures live. Pinned to ~/.tweetmd/out (alongside the profile and
- * enrich cache) so `tweetmd` works the same from any directory when installed
+ * enrich cache) so `xmd` works the same from any directory when installed
  * globally — not relative to the current working directory. Override with
  * TWEETMD_OUT or --out.
  */
@@ -113,19 +113,19 @@ function parseArgs(argv: string[]): Args {
   return args;
 }
 
-const HELP = `tweetmd — capture an X/Twitter tweet + conversation as Markdown
+const HELP = `xmd — capture an X/Twitter tweet + conversation as Markdown
 
 Usage:
-  tweetmd <tweet-url> [options]
-  tweetmd batch <URLs or pasted Markdown...> [--file <path>] [--resume]
-  tweetmd browse                Browse captures in a menu, read with inline images
-  tweetmd read [bundle]         Read a capture (a slug/handle, or omit to browse)
-  tweetmd reindex               Re-render existing bundles to the current format
-  tweetmd reindex --reenrich    Also backfill missing image enrichment (skipped/failed photos), then re-render
-  tweetmd archive <bundle...>   Move captures (slug/handle) out of browse/reindex into archive/
-  tweetmd prompt <ref...>       Print (and copy) an agent message to review captures; a ref is a
+  xmd <tweet-url> [options]
+  xmd batch <URLs or pasted Markdown...> [--file <path>] [--resume]
+  xmd browse                Browse captures in a menu, read with inline images
+  xmd read [bundle]         Read a capture (a slug/handle, or omit to browse)
+  xmd reindex               Re-render existing bundles to the current format
+  xmd reindex --reenrich    Also backfill missing image enrichment (skipped/failed photos), then re-render
+  xmd archive <bundle...>   Move captures (slug/handle) out of browse/reindex into archive/
+  xmd prompt <ref...>       Print (and copy) an agent message to review captures; a ref is a
                                 category[/sub], tweet URL, slug/handle, bundle dir, or dir of bundles
-  tweetmd login                 Open a browser to sign in to X (run once)
+  xmd login                 Open a browser to sign in to X (run once)
 
 Options:
   --no-transcripts Skip public video caption retrieval
@@ -188,7 +188,7 @@ function App({ opts }: { opts: PipelineOptions }) {
     <Box flexDirection="column" paddingY={1}>
       <Text>
         <Text color="cyan" bold>
-          tweetmd
+          xmd
         </Text>{" "}
         <Text dimColor>{opts.url}</Text>
       </Text>
@@ -235,7 +235,7 @@ function UrlPrompt({ onSubmit }: { onSubmit: (url: string) => void }) {
     <Box flexDirection="column" paddingY={1}>
       <Text>
         <Text color="cyan" bold>
-          tweetmd
+          xmd
         </Text>{" "}
         — paste a tweet URL:
       </Text>
@@ -327,7 +327,7 @@ async function main() {
   }
   if (args.command === "archive") {
     if (!args.refs.length) {
-      console.error("Usage: tweetmd archive <slug-or-handle> [more...]");
+      console.error("Usage: xmd archive <slug-or-handle> [more...]");
       process.exitCode = 1;
       return;
     }
@@ -339,7 +339,7 @@ async function main() {
   }
   if (args.command === "prompt") {
     if (!args.refs.length) {
-      console.error("Usage: tweetmd prompt <category|tweet-url|slug|dir> [more...]");
+      console.error("Usage: xmd prompt <category|tweet-url|slug|dir> [more...]");
       process.exitCode = 1;
       return;
     }

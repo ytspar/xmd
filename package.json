@@ -1,10 +1,10 @@
 {
-  "name": "tweetmd",
+  "name": "xmd",
   "version": "0.1.0",
   "description": "Convert a tweet + its conversation into Markdown, with image OCR, diagram-to-mermaid, and AI alt-text via a local Playwright session and claude -p.",
   "type": "module",
   "bin": {
-    "tweetmd": "dist/cli.js"
+    "xmd": "dist/cli.js"
   },
   "files": [
     "dist"

@@ -48,7 +48,7 @@ async function fetchPinned(input: string, maximum: number, deadline: number, res
     const response = await new Promise<{ bytes?: Buffer; location?: string }>((resolve, reject) => {
       let settled = false;
       const request = https.request(url, {
-        method: "GET", headers: { accept: "text/css,font/woff,font/ttf,font/otf,application/octet-stream", "user-agent": "tweetmd/0.1" },
+        method: "GET", headers: { accept: "text/css,font/woff,font/ttf,font/otf,application/octet-stream", "user-agent": "xmd/0.1" },
         lookup: ((_host: string, options: unknown, callback: (...args: unknown[]) => void) => {
           if (typeof options === "object" && options !== null && "all" in options && options.all) callback(null, [selected]);
           else callback(null, selected.address, selected.family);

@@ -358,7 +358,7 @@ export function renderTweetDoc(thread: Thread): string {
     out.push("## Conversation");
     out.push("");
     out.push(
-      `${plural(thread.replies.length, "reply", "replies")} captured in [\`conversation.md\`](conversation.md) — or press \`c\` to unfold in \`tweetmd read\`.`,
+      `${plural(thread.replies.length, "reply", "replies")} captured in [\`conversation.md\`](conversation.md) — or press \`c\` to unfold in \`xmd read\`.`,
     );
     out.push("");
   }
@@ -482,7 +482,7 @@ function renderReferences(thread: Thread): string {
 function renderClaudeGuide(thread: Thread, slug: string): string {
   return `# Captured tweet thread — for analysis
 
-This folder is a self-contained capture of an X/Twitter conversation produced by \`tweetmd\`.
+This folder is a self-contained capture of an X/Twitter conversation produced by \`xmd\`.
 You are likely being pointed here to read and analyze it.
 
 ## Files

@@ -4,8 +4,6 @@ Save X/Twitter posts, conversation context, media, and linked sources as Markdow
 bundles. Optional Claude integration adds image transcription, diagram-to-Mermaid
 conversion, descriptions, and topic categorization.
 
-The CLI command is `tweetmd`.
-
 Capture runs in a local Playwright browser using your own X session. AI analysis
 uses the separately installed Claude CLI and sends content to its configured
 provider. This is an experimental CLI: X can change its endpoints, and a saved
@@ -22,13 +20,18 @@ pnpm install --frozen-lockfile
 pnpm run build
 npm link
 
-tweetmd login
-tweetmd https://x.com/example/status/1234567890
+xmd login
+xmd https://x.com/example/status/1234567890
 ```
 
 Installation downloads Playwright's Chromium through the `postinstall` script.
 Run `pnpm run browsers` to reinstall the matching browser if needed. To run from
 source without linking, use `pnpm run dev -- <url>`.
+
+If you previously linked `tweetmd`, run `npm link` again from this checkout to
+install the `xmd` command. Existing captures, browser sessions, and caches stay
+in `~/.tweetmd`; the `TWEETMD_*` environment variables remain supported. No data
+migration or new login is required for the rename.
 
 Optional tools:
 
@@ -45,16 +48,16 @@ Optional tools:
 
 ```bash
 # Capture without AI analysis:
-tweetmd https://x.com/example/status/1234567890 --no-enrich --no-categorize
+xmd https://x.com/example/status/1234567890 --no-enrich --no-categorize
 
 # Retry incomplete stages while retaining successful text and analysis:
-tweetmd https://x.com/example/status/1234567890 --resume
+xmd https://x.com/example/status/1234567890 --resume
 
 # Process URLs or Markdown links from a text file:
-tweetmd batch --file saved-links.txt --resume
+xmd batch --file saved-links.txt --resume
 
 # Watch the browser or choose a destination:
-tweetmd https://x.com/example/status/1234567890 --headed --out ./captures
+xmd https://x.com/example/status/1234567890 --headed --out ./captures
 ```
 
 By default, bundles live in `~/.tweetmd/out/<handle>_<id>/`, independent of the
@@ -84,7 +87,7 @@ under `<out>/.batches/` support recovery. Image analysis is cached by content ha
 
 ## Options
 
-Run `tweetmd --help` for the full command list.
+Run `xmd --help` for the full command list.
 
 | Option | Effect |
 | --- | --- |
@@ -108,15 +111,15 @@ Model availability depends on your Claude provider access.
 ## Read and organize
 
 ```bash
-tweetmd browse
-tweetmd read example
-tweetmd reindex
-tweetmd archive example
+xmd browse
+xmd read example
+xmd reindex
+xmd archive example
 
 # Prepare a review prompt from a topic, collection, URL, or bundle directory:
-tweetmd prompt agents-and-coding/context-and-memory
-tweetmd prompt collection/reading-list
-tweetmd prompt ~/.tweetmd/out/example_1234567890
+xmd prompt agents-and-coding/context-and-memory
+xmd prompt collection/reading-list
+xmd prompt ~/.tweetmd/out/example_1234567890
 ```
 
 The reader uses `mdcat`. At its prompt, enter `c` to expand replies, Enter to

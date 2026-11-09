@@ -92,7 +92,7 @@ async function main(): Promise<void> {
     cfg.body.trim() +
     "\n" +
     renderSources(cfg.sources) +
-    `\n---\n\nCompiled from local \`tweetmd\` captures under \`~/.tweetmd/out\`. Model names, benchmark numbers, and cost claims are as reported by the tweet authors — not independently verified.\n`;
+    `\n---\n\nCompiled from local \`xmd\` captures under \`~/.tweetmd/out\`. Model names, benchmark numbers, and cost claims are as reported by the tweet authors — not independently verified.\n`;
 
   const outPath = path.join(reportsDir, `${cfg.slug}.md`);
   await fs.writeFile(outPath, out, "utf8");

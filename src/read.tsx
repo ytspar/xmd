@@ -1,5 +1,5 @@
 /**
- * `tweetmd read` / `tweetmd browse` — an Ink browse menu over captured bundles
+ * `xmd read` / `xmd browse` — an Ink browse menu over captured bundles
  * that hands the selected capture to `mdcat` for rendering (inline images +
  * styled text in a graphics-capable terminal). The conversation is folded by
  * default and unfolded on demand (`c`), matching the tweet.md / conversation.md
@@ -71,7 +71,7 @@ async function loadSummaries(outBase: string): Promise<Summary[]> {
           capturedAt: thread.capturedAt ?? "",
         };
       } catch {
-        return null; // not a tweetmd bundle (no/invalid thread.json)
+        return null; // not an xmd bundle (no/invalid thread.json)
       }
     }),
   );
@@ -141,7 +141,7 @@ function BrowseMenu({
     <Box flexDirection="column" paddingY={1}>
       <Text>
         <Text color="cyan" bold>
-          tweetmd
+          xmd
         </Text>{" "}
         <Text dimColor>
           {shown.length}/{items.length} captures
@@ -420,7 +420,7 @@ export async function runReader(
   while (true) {
     const items = await loadSummaries(outBase);
     if (items.length === 0) {
-      console.error(`No captures found in ${outBase}. Capture one first: tweetmd <url>`);
+      console.error(`No captures found in ${outBase}. Capture one first: xmd <url>`);
       return;
     }
     const pick = await pickBundle(items);

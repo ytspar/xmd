@@ -512,7 +512,7 @@ async function loadBundles(outBase: string): Promise<Map<string, BundleInfo>> {
         subject: subjectFrom(thread.main.text),
       });
     } catch {
-      // not a tweetmd bundle
+      // not an xmd bundle
     }
   }
   return bundles;

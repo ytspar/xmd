@@ -188,7 +188,7 @@ async function readCaption(url: string, fetcher: typeof fetch, timeoutMs: number
   throw new Error("Caption redirect limit reached.");
 }
 async function publicCaptionMetadata(url: string, bin: string, timeoutMs: number): Promise<{ title?: string; tracks: CaptionTrack[] }> {
-  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "tweetmd-caption-"));
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "xmd-caption-"));
   try {
     const text = await new Promise<string>((resolve, reject) => {
       const proc = spawn(bin, ["--ignore-config", "--no-plugin-dirs", "--no-remote-components", "--no-cache-dir", "--skip-download", "--dump-single-json", "--no-playlist", "--no-warnings", "--retries", "0", "--extractor-retries", "0", "--socket-timeout", "10", "--", url], { cwd: dir, stdio: ["ignore", "pipe", "pipe"] });

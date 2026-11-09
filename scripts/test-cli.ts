@@ -12,6 +12,15 @@ try {
     ancestors: [], replies: [], sourceUrl: "https://x.com/author/status/123", capturedAt: "2026-11-04T00:00:00Z",
   }));
   const entry = process.env.TWEETMD_TEST_COMPILED ? ["dist/cli.js"] : ["--import", "tsx", "src/cli.tsx"];
+  const help = spawnSync(process.execPath, [...entry, "--help"], { encoding: "utf8", timeout: 15_000 });
+  assert.equal(help.status, 0, help.stderr);
+  assert.match(help.stdout, /^xmd —/);
+  assert.match(help.stdout, /xmd login/);
+  assert.doesNotMatch(help.stdout, /\btweetmd (?:login|read|browse|batch|<)/);
+  assert.match(help.stdout, /~\/\.tweetmd\/out/, "Existing data location stays compatible");
+  const usage = spawnSync(process.execPath, [...entry, "archive"], { encoding: "utf8", timeout: 15_000 });
+  assert.equal(usage.status, 1);
+  assert.match(usage.stderr, /Usage: xmd archive/);
   const result = spawnSync(process.execPath, [...entry, "batch", "https://x.com/author/status/123?s=46 https://x.com/author/status/123", "--resume", "--no-enrich", "--no-links", "--no-categorize", "--out", dir], { encoding: "utf8", timeout: 15_000 });
   assert.equal(result.status, 2, result.stderr);
   assert.match(result.stderr, /0 complete, 1 partial, 0 failed/);

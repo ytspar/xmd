@@ -121,7 +121,7 @@ async function validateRaster(input: Buffer, baseUrl?:string): Promise<{ buffer:
   // frame to PNG so downstream OCR need not support each publisher format.
   let output:Buffer;
   if(context.fonts.length){
-    const directory=await fs.mkdtemp(path.join(tmpdir(),"tweetmd-svg-fonts-"));
+    const directory=await fs.mkdtemp(path.join(tmpdir(),"xmd-svg-fonts-"));
     try{
       const fontFiles:string[]=[];
       for(const [index,font] of context.fonts.entries()){

@@ -34,13 +34,13 @@ npm run categorize -- --bundle example --category search/ranking
 npm run categorize -- --bundle example --collections reading-list --tags retrieval,reranking
 # Migrate a legacy category that was really a collection (does not infer topics):
 npm run categorize -- --move-to-collection reading-list
-tweetmd prompt collection/reading-list
-tweetmd prompt tag/retrieval
+xmd prompt collection/reading-list
+xmd prompt tag/retrieval
 ```
 
 Collections and tags never replace the primary topic. Existing manifests remain
 readable without migration; moving a legacy category to a collection is explicit
-and marks its members as needing a primary topic. Existing `tweetmd prompt reading-list`
+and marks its members as needing a primary topic. Existing `xmd prompt reading-list`
 references continue resolving after migration. Category updates use a cross-process
 writer lock and atomic replacement; malformed manifests are reported, never reset
 silently.
