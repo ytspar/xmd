@@ -1,8 +1,10 @@
-# tweetmd
+# xmd
 
 Save X/Twitter posts, conversation context, media, and linked sources as Markdown
 bundles. Optional Claude integration adds image transcription, diagram-to-Mermaid
 conversion, descriptions, and topic categorization.
+
+The CLI command is `tweetmd`.
 
 Capture runs in a local Playwright browser using your own X session. AI analysis
 uses the separately installed Claude CLI and sends content to its configured
