@@ -1,5 +1,5 @@
 {
-  "name": "xmd",
+  "name": "xmd-cli",
   "version": "0.1.0",
   "description": "Convert a tweet + its conversation into Markdown, with image OCR, diagram-to-mermaid, and AI alt-text via a local Playwright session and claude -p.",
   "type": "module",
@@ -20,7 +20,8 @@
     "report": "tsx scripts/generate-report.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.scripts.json --noEmit",
     "guard:ts": "scripts/guard-typescript-only.sh",
-    "test": "node --import tsx --test scripts/test-*.ts"
+    "test": "node --import tsx --test scripts/test-*.ts",
+    "prepack": "npm run build"
   },
   "engines": {
     "node": ">=22"
@@ -60,5 +61,13 @@
     "tsx": "^4.19.1",
     "typescript": "^5.6.2"
   },
-  "packageManager": "pnpm@10.24.0"
+  "packageManager": "pnpm@10.24.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ytspar/xmd.git"
+  },
+  "homepage": "https://github.com/ytspar/xmd#readme",
+  "bugs": {
+    "url": "https://github.com/ytspar/xmd/issues"
+  }
 }

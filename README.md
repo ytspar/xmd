@@ -9,6 +9,19 @@ uses the separately installed Claude CLI and sends content to its configured
 provider. This is an experimental CLI: X can change its endpoints, and a saved
 capture may be incomplete.
 
+## Install
+
+Use Node.js 22 or newer. Install the `xmd-cli` npm package; its command is `xmd`:
+
+```bash
+npm install -g xmd-cli
+xmd login
+xmd https://x.com/example/status/1234567890
+```
+
+A graphical browser is needed for the initial X sign-in. Installation downloads
+Playwright's Chromium. Optional tools are listed below.
+
 ## Install from source
 
 Use Node.js 22 or newer and pnpm. A graphical browser is needed for the initial
