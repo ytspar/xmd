@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+        with:
+          version: 10.24.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      # Fixture tests do not need browsers, login profiles, or provider credentials.
+      # Skip lifecycle scripts, including the root Chromium-install postinstall.
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Check TypeScript source policy
+        run: pnpm run guard:ts
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Run fixture tests
+        run: pnpm test
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Test the compiled CLI
+        run: node --import tsx --test scripts/test-cli.ts
+        env:
+          TWEETMD_TEST_COMPILED: '1'
+
+      - name: Check package contents
+        run: npm pack --dry-run
